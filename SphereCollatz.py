@@ -34,7 +34,7 @@ def collatz_read (r, a) :
 # ------------
 
 CACHE_SIZE = 1000000
-cache = []
+cache = [-1] * CACHE_SIZE
 
 def compute_cycle_length (i):
     global cache, CACHE_SIZE
@@ -47,11 +47,13 @@ def compute_cycle_length (i):
         if (i == 1):
             cycle_length = 1
         # If i is even
-        elif (i % 2):
+        elif ((i % 2) == 0):
             cycle_length = (compute_cycle_length(i/2) + 1)
         # Else i is odd
+        else:
             cycle_length = (compute_cycle_length(3*i + 1) + 1)
         # Cache the value if it's in our cache range
+        if (i < CACHE_SIZE):
             cache[i] = cycle_length
     return cycle_length
 
@@ -77,37 +79,12 @@ def collatz_eval (i, j) :
     # Builds cache which is an array with indicies of n and values of cycle length(n)
     if i < j+1:
         n_range = range(i, j+1)
-        cache = [-1] * (j+1)
     else:
         n_range = range(j, i+1)
-        cache = [-1] * (i+1)
-
-    # TODO: try caching everything, even intermediate values, up to 1,000,000 (? possible ?)
 
     # loops through given range
     for n in n_range:
-        # collatz is our 'intermediate-value'
-        collatz = n
-        # inclusive start
-        cycle_length = 1
-
-        while collatz > 1:
-            # if collatz is even
-            if collatz % 2 == 0:
-                collatz /= 2
-            # otherwise collatz is odd
-            else:
-                collatz = (3 * collatz)+ 1
-                # inclusive end
-
-            if collatz in n_range:
-                if cache[collatz] != -1:
-                    cycle_length += cache[collatz]
-                    break
-
-            cycle_length += 1
-
-        cache[n] = cycle_length
+        cycle_length = compute_cycle_length(n)
 
         if cycle_length > max_cycle_length:
             max_cycle_length = cycle_length
