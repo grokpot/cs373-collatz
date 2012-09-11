@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 
 # ---------------------------
-# projects/collatz/Collatz.py
-# Copyright (C) 2012
-# Glenn P. Downing
+# SphereCollatz.py
+# Ryan Prater
 # ---------------------------
 
-# ------------
-# collatz_read
-# ------------
+# -------
+# imports
+# -------
+
+import sys
 
 def collatz_read (r, a) :
     """
@@ -43,10 +44,10 @@ def collatz_eval (i, j) :
     max_cycle_length = -1
 
     # Sets the parameters in the right order for Python range()
-    if i <= j+1:
+    if i < j+1:
         index_range = range(i, j+1)
     else:
-        index_range = range(j, i+i)
+        index_range = range(j, i+1)
 
     # loops through given range
     for index in index_range:
@@ -67,6 +68,7 @@ def collatz_eval (i, j) :
             max_cycle_length = current_cycle_length
     assert max_cycle_length > 0
     return max_cycle_length
+
 # -------------
 # collatz_print
 # -------------
@@ -95,3 +97,5 @@ def collatz_solve (r, w) :
     while collatz_read(r, a) :
         v = collatz_eval(a[0], a[1])
         collatz_print(w, a[0], a[1], v)
+
+collatz_solve(sys.stdin, sys.stdout)
