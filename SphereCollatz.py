@@ -28,6 +28,35 @@ def collatz_read (r, a) :
     assert a[1] > 0
     return True
 
+
+# ------------
+# compute_cycle_length
+# ------------
+
+CACHE_SIZE = 1000000
+cache = []
+
+def compute_cycle_length (i):
+    global cache, CACHE_SIZE
+    cycle_length = -1
+
+    if (i < CACHE_SIZE) and (cache[i] != -1):
+        cycle_length += (cache[i] + 1)
+    else:
+        # Base case. Cycle length of 1 is 1
+        if (i == 1):
+            cycle_length = 1
+        # If i is even
+        elif (i % 2):
+            cycle_length = (compute_cycle_length(i/2) + 1)
+        # Else i is odd
+            cycle_length = (compute_cycle_length(3*i + 1) + 1)
+        # Cache the value if it's in our cache range
+            cache[i] = cycle_length
+    return cycle_length
+
+
+
 # ------------
 # collatz_eval
 # ------------
@@ -38,23 +67,30 @@ def collatz_eval (i, j) :
     j is the end       of the range, inclusive
     return the max cycle length in the range [i, j]
     """
+    # Beginning assertions
     assert i > 0
     assert j > 0
 
     max_cycle_length = -1
 
     # Sets the parameters in the right order for Python range()
+    # Builds cache which is an array with indicies of n and values of cycle length(n)
     if i < j+1:
-        index_range = range(i, j+1)
+        n_range = range(i, j+1)
+        cache = [-1] * (j+1)
     else:
-        index_range = range(j, i+1)
+        n_range = range(j, i+1)
+        cache = [-1] * (i+1)
+
+    # TODO: try caching everything, even intermediate values, up to 1,000,000 (? possible ?)
 
     # loops through given range
-    for index in index_range:
+    for n in n_range:
         # collatz is our 'intermediate-value'
-        collatz = index
+        collatz = n
         # inclusive start
-        current_cycle_length = 1
+        cycle_length = 1
+
         while collatz > 1:
             # if collatz is even
             if collatz % 2 == 0:
@@ -63,9 +99,20 @@ def collatz_eval (i, j) :
             else:
                 collatz = (3 * collatz)+ 1
                 # inclusive end
-            current_cycle_length += 1
-        if current_cycle_length > max_cycle_length:
-            max_cycle_length = current_cycle_length
+
+            if collatz in n_range:
+                if cache[collatz] != -1:
+                    cycle_length += cache[collatz]
+                    break
+
+            cycle_length += 1
+
+        cache[n] = cycle_length
+
+        if cycle_length > max_cycle_length:
+            max_cycle_length = cycle_length
+
+    # Ending assertions
     assert max_cycle_length > 0
     return max_cycle_length
 
