@@ -1,3 +1,15 @@
+commit 7d86549e8ea12170260d10cc97ddc9cbd65341ca
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Sep 12 16:06:15 2012 -0500
+
+    Cleaned up implementation and submitting. Fixes #11. Fixes #8
+
+commit 2cdb4a1745b6c8b046122844a6ab26e37b355f7d
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Sep 12 09:13:52 2012 -0500
+
+    Added a log of commits. Fixes #19. Fixes #3
+
 commit d8297b1661091023550c856d8dd227420e676e51
 Author: Ryan Prater <ryanprater@utexas.edu>
 Date:   Wed Sep 12 09:01:59 2012 -0500
