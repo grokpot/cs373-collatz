@@ -43,37 +43,44 @@ def collatz_read (r, a) :
 # size = 1000000    time ~ 1.98
 CACHE_SIZE = 100000
 cache = [-1] * CACHE_SIZE
+ONE_CYCLE = 1
+TWO_CYCLES = 2
 
-def compute_cycle_length (i):
+def compute_cycle_length (current_num):
     """
-    This is a recursive method that computes the cycle length of i
-    i is an int in which the cycle length is computed
+    This is a recursive method that computes the cycle length of current_num
+    current_num is an int in which the cycle length is computed
     On the way back up from the base case, the cycles are added to the total (called cycle_length)
     """
 
     # Make sure we're computing the cycle length of a valid number
-    assert i > 0
+    assert current_num > 0
     # Make sure we're getting an int
-    assert isinstance(i, int)
+    assert isinstance(current_num, int)
 
     global cache, CACHE_SIZE
     cycle_length = -1
 
-    if (i < CACHE_SIZE) and (cache[i] != -1):
-        cycle_length += (cache[i] + 1)
+    # If the current num is within the cache list index and has been cached
+    if (current_num < CACHE_SIZE) and (cache[current_num] != -1):
+        cycle_length += (cache[current_num] + ONE_CYCLE)
+    # Otherwise recurse
     else:
         # Base case. Cycle length of 1 is 1
-        if (i == 1):
+        if (current_num == 1):
             cycle_length = 1
-        # If i is even
-        elif ((i % 2) == 0):
-            cycle_length = (compute_cycle_length(i/2) + 1)
-        # Else i is odd
+        # If current_num is even
+        elif ((current_num % 2) == 0):
+            # Determine cycle length of current_num by recursively sending n/2
+            cycle_length = (compute_cycle_length(current_num/2) + ONE_CYCLE)
+        # Else current_num is odd
         else:
-            cycle_length = (compute_cycle_length(3*i + 1) + 1)
+            # Determine cycle length of current_num by recursively sending (3n+1)/2
+            # NOTE: This is a shortcut. Since an odd * odd = even, we can combine steps here (as opposed to sending 3n+1 and then n/2 in the next step).
+            cycle_length = (compute_cycle_length(current_num + (current_num >> 1) + 1) + TWO_CYCLES)
             # Cache the value if it's in our cache range
-        if (i < CACHE_SIZE):
-            cache[i] = cycle_length
+        if (current_num < CACHE_SIZE):
+            cache[current_num] = cycle_length
 
     # Make sure cycle_length has changed from its instantiation
     assert cycle_length > 0
