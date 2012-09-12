@@ -41,7 +41,6 @@ def collatz_read (r, a) :
 # size = 10000      time ~ 7.2
 # size = 100000     time ~ 1.53 <- best after extended testing
 # size = 1000000    time ~ 1.98
-# size = 2000000    time ~ 2.50
 CACHE_SIZE = 100000
 cache = [-1] * CACHE_SIZE
 
@@ -54,6 +53,8 @@ def compute_cycle_length (i):
 
     # Make sure we're computing the cycle length of a valid number
     assert i > 0
+    # Make sure we're getting an int
+    assert isinstance(i, int)
 
     global cache, CACHE_SIZE
     cycle_length = -1
@@ -91,9 +92,12 @@ def collatz_eval (i, j) :
     j is the end       of the range, inclusive
     return the max cycle length in the range [i, j]
     """
-    # Beginning assertions
+    # pre-condition assertions
     assert i > 0
     assert j > 0
+    # Make sure we're getting ints
+    assert isinstance(i, int)
+    assert isinstance(j, int)
 
     max_cycle_length = -1
 
@@ -104,6 +108,9 @@ def collatz_eval (i, j) :
     else:
         n_range = range(j, i+1)
 
+    # Make sure we've got a valid range
+    assert isinstance(n_range, list)
+
     # loops through given range
     for n in n_range:
         cycle_length = compute_cycle_length(n)
@@ -111,8 +118,9 @@ def collatz_eval (i, j) :
         if cycle_length > max_cycle_length:
             max_cycle_length = cycle_length
 
-    # Ending assertions
+    # post-condition assertions
     assert max_cycle_length > 0
+
     return max_cycle_length
 
 # -------------
