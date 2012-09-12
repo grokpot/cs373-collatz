@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 
 # ---------------------------
-# SphereCollatz.py
-# Ryan Prater
+# Name  : Ryan J. Prater
+# EID   : rp22566
+# CSID  : rprater
+# CS373 - Downing - Project #1
 # ---------------------------
 
 # -------

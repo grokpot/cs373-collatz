@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 # ---------------------------
-# projects/collatz/Collatz.py
-# Copyright (C) 2012
-# Glenn P. Downing
+# Name  : Ryan J. Prater
+# EID   : rp22566
+# CSID  : rprater
+# CS373 - Downing - Project #1
 # ---------------------------
 
 # ------------
