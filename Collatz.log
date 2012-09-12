@@ -1,0 +1,53 @@
+commit d8297b1661091023550c856d8dd227420e676e51
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Sep 12 09:01:59 2012 -0500
+
+    Added annotations and pre/post conditions. Fixed #20
+
+commit a0b6fd05fe8461d158ca2cede89daaafa5ea53fd
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Sep 12 01:28:54 2012 -0500
+
+    Changed file headers to display my info and generated documentation for Collatz.py. Fixed #13. Fixed #10
+
+commit 8903a4f60b8655b74d0bc7270e455c4f52239bec
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Sep 12 01:10:11 2012 -0500
+
+    Improved cache size to reduce Sphere running time < 2.00. Fixed #15
+
+commit 07ff242f08fec98d26b1a72d3f4a18454c49cfce
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Wed Sep 12 01:06:53 2012 -0500
+
+    Added custom acceptance tests and README file. Fixed #17 Fixed #18.
+
+commit 9586cd772a7fd2dc7e3471321c170df6f32539cb
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Sep 11 18:23:50 2012 -0500
+
+    Added custom unit tests for new method compute_cycle_length and other methods. All methods now have at least 3 unit tests and are ready to withstand other student tests. Fixes #16
+
+commit 62275b7958aca2577fa583f46ea1c0d88b1d4f57
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Sep 11 15:07:18 2012 -0500
+
+    SphereCollatz.py with cache accepted by Sphere. Fixes #14
+
+commit e0fe5f5ad5ede333896bd1078bde035672bcb0c9
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Sep 11 14:33:03 2012 -0500
+
+    in-between new cache migration for SphereCollatz.py
+
+commit b9930f89130fdfb9c2b361485ed9d37378e7dd47
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Tue Sep 11 01:32:59 2012 -0500
+
+    Hacked a solution that Sphere accepts (not really though because of time constraints). Fixed #12
+
+commit 72d169d3dc9ff522b50ccd3453d891a10f1abe93
+Author: Ryan Prater <ryanprater@utexas.edu>
+Date:   Mon Sep 10 11:01:36 2012 -0500
+
+    First commit to collatz. Closes #1
