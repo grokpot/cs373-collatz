@@ -40,7 +40,7 @@ def collatz_read (r, a) :
 # size = 100000     time ~ 1.53 <- best after extended testing
 # size = 1000000    time ~ 1.98
 # size = 2000000    time ~ 2.50
-CACHE_SIZE = 100
+CACHE_SIZE = 100000
 cache = [-1] * CACHE_SIZE
 
 def compute_cycle_length (i):
