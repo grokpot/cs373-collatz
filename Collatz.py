@@ -28,6 +28,57 @@ def collatz_read (r, a) :
     return True
 
 # ------------
+# compute_cycle_length
+# ------------
+
+# Define the size of the cache
+# Sphere results:
+# size = 100        time limit exceeded
+# size = 1000       time limit exceeded
+# size = 10000      time ~ 7.2
+# size = 100000     time ~ 1.53 <- best after extended testing
+# size = 1000000    time ~ 1.98
+# size = 2000000    time ~ 2.50
+CACHE_SIZE = 1000000
+cache = [-1] * CACHE_SIZE
+
+def compute_cycle_length (i):
+    """
+    This is a recursive method that computes the cycle length of i
+    i is an int in which the cycle length is computed
+    On the way back up from the base case, the cycles are added to the total (called cycle_length)
+    """
+
+    # Make sure we're computing the cycle length of a valid number
+    assert i > 0
+
+    global cache, CACHE_SIZE
+    cycle_length = -1
+
+    if (i < CACHE_SIZE) and (cache[i] != -1):
+        cycle_length += (cache[i] + 1)
+    else:
+        # Base case. Cycle length of 1 is 1
+        if (i == 1):
+            cycle_length = 1
+        # If i is even
+        elif ((i % 2) == 0):
+            cycle_length = (compute_cycle_length(i/2) + 1)
+        # Else i is odd
+        else:
+            cycle_length = (compute_cycle_length(3*i + 1) + 1)
+            # Cache the value if it's in our cache range
+        if (i < CACHE_SIZE):
+            cache[i] = cycle_length
+
+    # Make sure cycle_length has changed from its instantiation
+    assert cycle_length > 0
+
+    return cycle_length
+
+
+
+# ------------
 # collatz_eval
 # ------------
 
@@ -37,36 +88,30 @@ def collatz_eval (i, j) :
     j is the end       of the range, inclusive
     return the max cycle length in the range [i, j]
     """
+    # Beginning assertions
     assert i > 0
     assert j > 0
 
     max_cycle_length = -1
 
     # Sets the parameters in the right order for Python range()
-    if i <= j+1:
-        index_range = range(i, j+1)
+    # Builds cache which is an array with indicies of n and values of cycle length(n)
+    if i < j+1:
+        n_range = range(i, j+1)
     else:
-        index_range = range(j, i+i)
+        n_range = range(j, i+1)
 
     # loops through given range
-    for index in index_range:
-        # collatz is our 'intermediate-value'
-        collatz = index
-        # inclusive start
-        current_cycle_length = 1
-        while collatz > 1:
-            # if collatz is even
-            if collatz % 2 == 0:
-                collatz /= 2
-            # otherwise collatz is odd
-            else:
-                collatz = (3 * collatz)+ 1
-                # inclusive end
-            current_cycle_length += 1
-        if current_cycle_length > max_cycle_length:
-            max_cycle_length = current_cycle_length
+    for n in n_range:
+        cycle_length = compute_cycle_length(n)
+
+        if cycle_length > max_cycle_length:
+            max_cycle_length = cycle_length
+
+    # Ending assertions
     assert max_cycle_length > 0
     return max_cycle_length
+
 # -------------
 # collatz_print
 # -------------

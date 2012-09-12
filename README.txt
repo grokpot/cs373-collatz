@@ -1,19 +1,19 @@
 Project #1: Collatz
 Date: Wed, 12 Sep 2012
 
-Course Name:
-Unique:
+Course Name: cs373 Software Engineering
+Unique: 53075
 
-First Name:
-Last Name:
-EID:
-E-mail:
-Estimated number of hours:
-Actual    number of hours:
+First Name: Ryan
+Last Name: Prater
+EID: rp22566
+E-mail: ryanprater@utexas.edu
+Estimated number of hours: 3
+Actual    number of hours: 8
 
-Turnin CS Username:
-GitHub ID:
-GitHub Repository Name:
+Turnin CS Username: rprater
+GitHub ID: ryanprater
+GitHub Repository Name: cs373-collatz
 
 Comments:
 
